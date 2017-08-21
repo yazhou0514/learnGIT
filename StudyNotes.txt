@@ -1,0 +1,21 @@
+1 远程仓库
+	本地SSH公私秘钥 ：“ssh-keygen -t rsa -C "674275470@qq.com"”
+	  {
+	    执行该命令后，一路回车即可
+	    查看本地C:\Users\Administrator\.ssh目录下是否存在私钥id_rsa和公钥id_rsa.pub
+	    登录GitHub，设置中增加SSH keys，添加公钥id_rsa.pub内容，然后创建一个repository（yazhou0514/learnGIT）
+	  }
+	将本地库与GitHub关联 ：“git remote add origin git@github.com:yazhou0514/learnGIT”
+	  {
+	    需在本地仓库下执行该命令
+	  }
+	将本地库推送到远程   ：“git push -u origin master”
+	  {
+	    提示：Warning: Permanently added the RSA host key for IP address '192.30.255.112' to the list of known hosts.
+	    将“192.30.255.112 github.com”加入到hosts文件解决
+	    由于远程库是空的，第一次推送master分支时，加上-u参数，
+	       Git不但会把本地的master分支内容推送的远程新的master分支，
+	       还会把本地的master分支和远程的master分支关联起来，
+	       在以后的推送或者拉取时就可以简化命令。（git push origin master）
+	  }
+	
