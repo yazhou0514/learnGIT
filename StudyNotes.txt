@@ -1,3 +1,42 @@
+1 创建版本库
+	Windows环境，打开GIT bash(linux命令)
+	创建一个文件夹 ：“mkdir test”
+	进入该文件夹   ：“cd test”
+	初始化项目仓库 ：“git init”
+	查看创建结果   ：“ls -a”
+
+2 提交文件
+	创建一个文件   ：“echo "first line">>readme.txt”
+	加入到暂存区   ：“git add .”（.加入所有文件）
+	提交到本地仓库 ：“git commit -m "first commit"”
+
+3 修改文件
+	修改一个文件   ：“echo "second line">>readme.txt”
+	查看文件状态   ：“git status”
+	加入到暂存区   ：“git add .”（.加入所有文件）
+	提交到本地仓库 ：“git commit -m "second commit"”
+
+4撤销修改
+	未add的文件    ：“git checkout .”或“git checkout -- readme.txt”
+	（ 
+	   add后又修改，撤消后退回到add的状态，
+	   无法再使用该方法退回到和版本库一致。
+	 ）
+	已add的文件    ：“git reset HEAD .”
+	（
+	   总结：先 git reset HEAD .，再git checkout .，即可彻底还原已add文件
+	 ）
+
+5版本回退
+	查看日志       ：“git log”、“git reglog”
+	退回一个版本   ：“git git reset --hard HEAD^”
+	（如果当前为版本三，退回到版本二后，无法通过git log查看到版本三的日志）
+	退回两个版本   ：“git git reset --hard HEAD^^”
+	退回10个版本   ：“git git reset --hard HEAD~10”
+	跳转到制定版本 ：“git reset --hard 3628164”
+	（配合git reglog查看提交记录）
+
+
 1 远程仓库
 
 	本地SSH公私秘钥 ：“ssh-keygen -t rsa -C "674275470@qq.com"”
