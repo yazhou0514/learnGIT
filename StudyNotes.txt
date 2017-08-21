@@ -1,4 +1,5 @@
 1 远程仓库
+
 	本地SSH公私秘钥 ：“ssh-keygen -t rsa -C "674275470@qq.com"”
 	  {
 	    执行该命令后，一路回车即可
@@ -21,9 +22,20 @@
 	推荐，现在远程创建仓库，然后： “git clone git@github.com:yazhou0514/learnGIT.git”
 
 2 分支
-	创建并切换   ： “git checkout -b dev”
+
+说明：创建并切换到新分支后，HEAD便指向了新分支，其后的操作和在主分支一样；
+      将新分支合并到master，可以理解为让master执行一遍新分支创建后的操作！
+       
+	查看分支    ： “git branch”
+	创建分支    ： “git branch NameBranch”
+	切换分支    ： “git checkout NameBranch”
+	创建并切换  ： “git checkout -b NameBranch”
 	{
 	   -b：代表创建并切换到dev分支；
-	   该命令相当于 git branch dev 和 git checkout dev
 	}
-	查看当前分支 ： “git branch”
+	合并某分支到当前分支：“git merge NameBranch”
+	{
+	   先 git checkout master，再 git merge NameBranch
+	   将 NameBranch合并到master
+	}
+	删除分支    ： “git branch -d NameBranch””
