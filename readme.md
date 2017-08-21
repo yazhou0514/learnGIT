@@ -1,4 +1,1 @@
-版权所有
-a
-dddddd
-asdfasdf
+没有版权
