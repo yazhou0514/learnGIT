@@ -79,7 +79,12 @@
 	}
 	删除分支    ： “git branch -d NameBranch””
 
-3 冲突
+3 远程分支
+	1 切换到本地非master分支 ： “git checkout -b NameBranch”
+	2 将新分支推送到远程     ： “git push origin NameBranch”
+	n 删除远程分支           ： “git push origin :NameBranch”（注意冒号）
+
+4 冲突
 	Auto-merging readme.txt
 	CONFLICT (content): Merge conflict in readme.txt
 	Automatic merge failed; fix conflicts and then commit the result.
