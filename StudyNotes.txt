@@ -47,9 +47,10 @@
 	  }
 	将本地库与GitHub关联 ：“git remote add origin git@github.com:yazhou0514/learnGIT”
 	  {
-	    需在本地仓库下执行该命令
+	    需在本地仓库下执行该命令，需要提前创建好git@github.com:yazhou0514/learnGIT
 	  }
-	将本地库推送到远程   ：“git push -u origin master”
+	将本地库推送到远程   ：“git push -u origin master”（第一次）
+	                     ： “git push origin master”   （以后）
 	  {
 	    提示：Warning: Permanently added the RSA host key for IP address '192.30.255.112' to the list of known hosts.
 	    将“192.30.255.112 github.com”加入到hosts文件解决
@@ -59,6 +60,9 @@
 	       在以后的推送或者拉取时就可以简化命令。（git push origin master）
 	  }
 	推荐，现在远程创建仓库，然后： “git clone git@github.com:yazhou0514/learnGIT.git”
+
+	查看远程库信息  ： “git remote” 或 “git remote -v”
+
 
 2 分支
 
@@ -80,17 +84,44 @@
 	删除分支    ： “git branch -d NameBranch””
 
 3 远程分支
-	1 切换到本地非master分支 ： “git checkout -b NameBranch”
-	2 将新分支推送到远程     ： “git push origin NameBranch”
-	n 删除远程分支           ： “git push origin :NameBranch”（注意冒号）
+	远程没有分支：
+	    1 切换到本地非master分支 ： “git checkout -b NameBranch”
+	    2 将新分支推送到远程     ： “git push origin NameBranch”
+	
+	远程有分支：
+	    1 克隆远程仓库           ： “git clone git@github.com:yazhou0514/learnGIT.git”
+	    2 查看分支               ： “git branch”
+	    3 创建远程已有分支到本地 ： “git checkout -b NameBranch origin/NameBranch”
+	    4 推送分支               ： “git push origin NameBranch”
 
+	n 删除远程分支           ： “git push origin :NameBranch”（注意冒号）
+	
 4 冲突
-	Auto-merging readme.txt
-	CONFLICT (content): Merge conflict in readme.txt
-	Automatic merge failed; fix conflicts and then commit the result.
-	先手动修改冲突文件，然后执行 add 、 commit 命令，冲突解决
-	通过“git log --graph” “git log --graph --pretty=oneline --abbrev-commit”查看解决过程
-	最后删除分支 “git branch -d NameBranch”
+	{
+	  Auto-merging readme.txt
+	  CONFLICT (content): Merge conflict in readme.txt
+	  Automatic merge failed; fix conflicts and then commit the result.
+	}
+	1 先手动修改冲突文件，然后执行 add 、 commit 命令，冲突解决
+	2 通过“git log --graph” “git log --graph --pretty=oneline --abbrev-commit”查看解决过程
+
+5 远程协作
+	1 假设同时修改远程NameBranch分支
+	  {
+	      “git clone git@github.com:yazhou0514/learnGIT.git”
+	      “git checkout -b NameBranch origin/NameBranch”
+	  }
+	2 修改完成后，拉取最新内容 ： “git pull”
+	  {
+	      错误：There is no tracking information for the current branch.
+	      处理：“git branch --set-upstream NameBranch origin/NameBranch”
+
+	      错误：冲突
+	      处理：正常解决冲突，然后commit
+	  }
+	3 推送分支 ： “git push origin NameBranch”
+
+	
 
 
 
