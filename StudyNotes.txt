@@ -28,13 +28,13 @@
 	 ）
 
 5版本回退
-	查看日志       ：“git log”、“git reglog”
+	查看日志       ：“git log”、“git reflog”
 	退回一个版本   ：“git git reset --hard HEAD^”
 	（如果当前为版本三，退回到版本二后，无法通过git log查看到版本三的日志）
 	退回两个版本   ：“git git reset --hard HEAD^^”
 	退回10个版本   ：“git git reset --hard HEAD~10”
 	跳转到制定版本 ：“git reset --hard 3628164”
-	（配合git reglog查看提交记录）
+	（配合git reflog查看提交记录）
 
 
 1 远程仓库
@@ -55,11 +55,11 @@
 	    提示：Warning: Permanently added the RSA host key for IP address '192.30.255.112' to the list of known hosts.
 	    将“192.30.255.112 github.com”加入到hosts文件解决
 	    由于远程库是空的，第一次推送master分支时，加上-u参数，
-	       Git不但会把本地的master分支内容推送的远程新的master分支，
+	       Git不但会把本地的master分支内容推送到远程新的master分支，
 	       还会把本地的master分支和远程的master分支关联起来，
 	       在以后的推送或者拉取时就可以简化命令。（git push origin master）
 	  }
-	推荐，现在远程创建仓库，然后： “git clone git@github.com:yazhou0514/learnGIT.git”
+	推荐，先在远程创建仓库，然后： “git clone git@github.com:yazhou0514/learnGIT.git”
 
 	查看远程库信息  ： “git remote” 或 “git remote -v”
 
@@ -74,7 +74,7 @@
 	切换分支    ： “git checkout NameBranch”
 	创建并切换  ： “git checkout -b NameBranch”
 	{
-	   -b：代表创建并切换到dev分支；
+	   -b：代表创建并切换到NameBranch”分支；
 	}
 	合并某分支到当前分支：“git merge NameBranch”
 	{
@@ -125,3 +125,7 @@
 
 
 
+协作原则
+1] 如果一个分支已经公开，就不应该重写、修改该分支的任何部分
+2] 已经发布出去的代码不应该再执行 rebase
+3] 建议使用 fork + pr(pull request) 协作开发
