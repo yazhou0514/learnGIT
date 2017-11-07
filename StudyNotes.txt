@@ -28,13 +28,13 @@
 	 ）
 
 5版本回退
-	查看日志       ：“git log”、“git reglog”
+	查看日志       ：“git log”、“git reflog”
 	退回一个版本   ：“git git reset --hard HEAD^”
 	（如果当前为版本三，退回到版本二后，无法通过git log查看到版本三的日志）
 	退回两个版本   ：“git git reset --hard HEAD^^”
 	退回10个版本   ：“git git reset --hard HEAD~10”
 	跳转到制定版本 ：“git reset --hard 3628164”
-	（配合git reglog查看提交记录）
+	（配合git reflog查看提交记录）
 
 
 1 远程仓库
@@ -55,11 +55,11 @@
 	    提示：Warning: Permanently added the RSA host key for IP address '192.30.255.112' to the list of known hosts.
 	    将“192.30.255.112 github.com”加入到hosts文件解决
 	    由于远程库是空的，第一次推送master分支时，加上-u参数，
-	       Git不但会把本地的master分支内容推送的远程新的master分支，
+	       Git不但会把本地的master分支内容推送到远程新的master分支，
 	       还会把本地的master分支和远程的master分支关联起来，
 	       在以后的推送或者拉取时就可以简化命令。（git push origin master）
 	  }
-	推荐，现在远程创建仓库，然后： “git clone git@github.com:yazhou0514/learnGIT.git”
+	推荐，先在远程创建仓库，然后： “git clone git@github.com:yazhou0514/learnGIT.git”
 
 	查看远程库信息  ： “git remote” 或 “git remote -v”
 
@@ -74,7 +74,7 @@
 	切换分支    ： “git checkout NameBranch”
 	创建并切换  ： “git checkout -b NameBranch”
 	{
-	   -b：代表创建并切换到dev分支；
+	   -b：代表创建并切换到NameBranch”分支；
 	}
 	合并某分支到当前分支：“git merge NameBranch”
 	{
@@ -129,174 +129,3 @@
 1] 如果一个分支已经公开，就不应该重写、修改该分支的任何部分
 2] 已经发布出去的代码不应该再执行 rebase
 3] 建议使用 fork + pr(pull request) 协作开发
-
-
-
-
-4) 配置邮箱地址和用户名
-	git config user.name "xxx"
-	git config user.email "xxx@xxx.xxx"
-
-6) 查看提交历史
-	# all commits
-	git log
-
-	# show special commit details
-	git show [commitid]
-
-	# show branch simple commits history
-	git show-branch --more=10
-
-	# show only one record details
-	git log -1 -p
-
-	# show graph
-	git log --graph  
-7) 查看提交差异
-	git diff [commit1] [commit2]
-8) 删除和重命名
-	# need commit before this, will delete from index and current directory
-	git rm file
-
-	# only delete from index
-	git rm --cached file
-
-	git mv file1 file2
-9) 创建版本库副本
-	git clone repo
-
-	# bare repo, only for clone, fetch and push, no commits
-	# 权威版本库
-	git clone --bare repo
-10) 查看删除当前 Git 配置
-	# list
-	git config -l
-
-	# unset
-	git config --unset --global user.email
-11) 查看所有文件的 SHA1
-	git ls-files -s
-
-	# only stage files
-	git ls-files --stage
-12) .gitignore 规则
-	字面置文件名匹配任何目录中的同名文件
-	目录名由末尾的反斜线(/)标记，匹配同名的目录和子目录，不匹配文件和符号链接
-	一个星号只能匹配一个文件或者目录名
-13) 特殊符号引用
-	HEAD 当前分支最近提交
-	ORIG_HEAD 原始 HEAD
-	FETCH_HEAD 最近 fetch 的分支 HEAD 的简写
-	MERGE_HEAD 正在进行合并进 HEAD 的提交 
-14) 查看文件中指定行是哪些提交修改的
-	git blame -L [start,end] file
-15) 创建分支
-	# will not change current branch
-	git branch branchName
-
-	# create branch from special commit
-	git branch branchName [commitId]
-16) 查看分支
-	# list local branches
-	git branch
-
-	# list remote branches
-	git branch -r
-
-	# list all
-	git branch -a
-17) 检出分支
-	# only checkout exist branch
-	git checkout branch
-
-	# create and chekcout new branch
-	git branch -b branchName
-
-	# Error: Your local changes to the following files would be overwritten by checkout.
-	# some solutions
-	1) git checkout -m branch and resolve confilts
-18) 删除分支
-	git branch -d branchName
-
-	# force delete
-	git branch -D branchName
-19) diff 差异比较
-	# differences between current work dir and index
-	git diff 
-
-	# differences between current work dir and special commit
-	git diff commit
-
-	# differences between index and special commit
-	git diff --cached commit
-
-	# differences between two commits
-	git diff commit1 commit2
-
-	# differences between staged and not staged
-	git diff HEAD
-
-	# differences in special dir or files
-	git diff  [dir or files]
-
-	# -w : ignore blank charactors
-	# --stat: simpe differences
-	# --color: pretty
-20) 合并分支
-	git merge branch
-
-	# if exist conflicts
-	1) resolve conflicts manually
-	2) git add
-	3) git commit
-21) 中止或者重新启动合并
-	# reset current work dir and index to the version before merge
-	git reset --hard HEAD
-
-	# reset after a new merge commit
-	git reset --hard ORIG_HEAD
-22) reset 重置(危险操作)
-	# --soft: only HEAD
-	# --mixed: HEAD and index, no work dir
-	# --hard: HEAD and index and work dir
-
-	git reset --soft commitId
-23) 在当前分支引入指定 commit
-	git cherry-pick commitId
-
-	git cherry-pick startcommit..endcommit
-24) 撤销某个提交
-	git revert commitId
-25) 修改最新提交(使用修改后的 commit 替换最新的 commit)
-	git commit --amend
-26) rebase 变基操作
-	git rebase branchName
-27) rebase 交互式编辑 rebase 顺序
-	# edit last 3 commit
-	git rebase -i branch~3
-28) stash 储藏(暂时保存)
-	git stash save [message]
-
-	git stash pop
-29) 远程版本库操作
-	git remote -v 
-
-	git remote add origin xxxxx
-
-	git remote remove origin
-
-	# fetch meta data, not merge
-	git fetch [origin] [branch]
-
-	# fetch meta data, andmerge
-	git pull [origin] [branch]
-
-	git push [origin] [branch]
-30) 添加和删除远程分支
-	# add
-	git push [localbranch] [repo]:[remotebranch]
-
-	# delete
-	git push [repo] --delete [remotebranch]
-31) 清理操作
-	git clean 
