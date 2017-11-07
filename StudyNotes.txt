@@ -129,3 +129,32 @@
 1] 如果一个分支已经公开，就不应该重写、修改该分支的任何部分
 2] 已经发布出去的代码不应该再执行 rebase
 3] 建议使用 fork + pr(pull request) 协作开发
+
+
+git rebase 和 git merge
+
+相同：
+    来将一个分支的更改并入另一个分支。
+
+区别：
+rebase(变基) ：将多个分支的log合并为一条
+  是将一系列提交按照原有次序依次应用到另一分支上。
+  示例：
+    $ git checkout test
+    $ git rebase master（变基为master，即master指向test的某个commit 或 使test是在当前master基础上进行commit）
+    $ git checkout master
+    $ git merge test    (将master移动到最新)
+
+merge(合并)  ：保留每个分支的log
+  是把最终结果合在一起
+  示例：
+     $ git checkout master（切换到master分支）
+     $ git merge test     （将test分支合并到master，并隐含的为master新建一个快照，即master分支commit了一次和test的合并内容）
+
+推荐：先rebase，如果有冲突，git rebase --abort，再换用merge~~
+总的原则是，
+  只对尚未推送或分享给别人的本地修改执行变基操作清理历史，
+  从不对已推送至别处的提交执行变基操作，
+这样，你才能享受到两种方式带来的便利。
+
+
